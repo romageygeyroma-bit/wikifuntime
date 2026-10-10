@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://romageygeyroma-bit.github.io/wikifuntime/sitemap.xml
+Sitemap: https://wikifuntime.vercel.app/sitemap.xml
