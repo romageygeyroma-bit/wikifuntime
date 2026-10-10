@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FunTime Mini Wiki — Спец • Сферы • Талисманы • Зелья</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#060608;--txt:#f6eef0;--mut:#b39aa1;--acc:#ff2233;--deep:#7d0c19;--line:rgba(255,45,60,.22);--green:#3dff8a;--red:#ff4d5e;--violet:#d3a6ff;--radius:22px;--ease:cubic-bezier(.22,1,.36,1)}
+html{scroll-behavior:smooth}
+::selection{background:var(--acc);color:#fff}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-track{background:#0a0a0c}::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#ff2233,#5e0a13);border-radius:99px;border:2px solid #0a0a0c}
+body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-180px;left:-140px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(255,20,40,.20),transparent 65%);filter:blur(70px);pointer-events:none;z-index:0;animation:drift1 18s ease-in-out infinite alternate}
+body::after{content:'';position:fixed;bottom:-220px;right:-160px;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(255,20,40,.14),rgba(120,10,25,.10) 45%,transparent 70%);filter:blur(80px);pointer-events:none;z-index:0;animation:drift2 22s ease-in-out infinite alternate}
+@keyframes drift1{from{transform:translate(0,0) scale(1)}to{transform:translate(7vw,12vh) scale(1.25)}}
+@keyframes drift2{from{transform:translate(0,0) scale(1.1)}to{transform:translate(-8vw,-10vh) scale(.95)}}
+header{position:sticky;top:0;z-index:30;backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);background:rgba(10,6,8,.62);border-bottom:1px solid var(--line);box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 12px 40px rgba(0,0,0,.5)}
+.wrap{max-width:1220px;margin:0 auto;padding:16px 18px;position:relative;z-index:1}
+.top{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.logo{display:flex;gap:12px;align-items:center}
+.logo-img{width:76px;height:76px;border-radius:22px;object-fit:cover;border:1px solid rgba(255,120,130,.55);box-shadow:0 0 0 1px rgba(255,60,70,.35),0 0 32px rgba(255,20,40,.55),0 12px 34px rgba(0,0,0,.6);transition:transform .5s var(--ease),box-shadow .5s;animation:logoGlow 3.6s ease-in-out infinite}
+.logo-img:hover{transform:scale(1.07) rotate(-2deg);box-shadow:0 0 0 1px rgba(255,150,150,.7),0 0 48px rgba(255,20,40,.75),0 14px 40px rgba(0,0,0,.6)}
+@keyframes logoGlow{0%,100%{box-shadow:0 0 0 1px rgba(255,120,130,.4),0 0 26px rgba(255,20,40,.45),0 12px 34px rgba(0,0,0,.6)}50%{box-shadow:0 0 0 1px rgba(255,150,150,.65),0 0 44px rgba(255,20,40,.7),0 12px 34px rgba(0,0,0,.6)}}
+.logo b{font-size:21px;text-shadow:0 0 24px rgba(255,34,51,.35)}.logo b i{color:var(--acc);font-style:normal}
+.logo small{display:block;color:var(--mut);font-weight:400;font-size:12.5px}
+.search{flex:1;min-width:240px;display:flex;align-items:center;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;padding:0 12px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:border-color .3s,box-shadow .3s,transform .3s var(--ease)}
+.search:focus-within{border-color:rgba(255,60,70,.6);box-shadow:0 0 0 3px rgba(255,34,51,.15),0 0 28px rgba(255,34,51,.25);transform:translateY(-1px)}
+.search span{opacity:.6}.search input{flex:1;background:transparent;border:0;color:var(--txt);padding:13px 10px;font-size:15px;outline:none}.search input::placeholder{color:#7d6f74}
+.filters{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.tab{border:1px solid var(--line);background:rgba(255,255,255,.035);color:var(--mut);padding:10px 16px;border-radius:999px;cursor:pointer;font-size:13.5px;font-weight:700;transition:all .3s var(--ease);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.tab small{opacity:.7;font-weight:400;margin-left:6px}
+.tab:hover{border-color:rgba(255,70,80,.6);color:var(--txt);transform:translateY(-2px);box-shadow:0 8px 20px rgba(255,20,40,.18)}
+.tab.active{background:linear-gradient(135deg,#ff2b3d,#a30f1f);border-color:rgba(255,120,130,.6);color:#fff;box-shadow:0 8px 26px rgba(255,20,40,.45),inset 0 1px 0 rgba(255,255,255,.35)}
+.rar{border:1px solid var(--line);background:rgba(255,255,255,.02);color:var(--mut);padding:9px 13px;border-radius:999px;cursor:pointer;font-size:12.5px;font-weight:700;transition:all .3s var(--ease)}
+.rar:hover{border-color:rgba(255,70,80,.5);color:var(--txt);transform:translateY(-2px)}
+.rar.active{background:#f6eef0;color:#3d060c;border-color:#f6eef0;box-shadow:0 6px 20px rgba(255,255,255,.15)}
+.count{margin-left:auto;color:var(--mut);font-size:13px}
+.hero{margin:22px auto 6px;display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
+@media(max-width:860px){.hero{grid-template-columns:1fr}}
+.hero-card{background:linear-gradient(160deg,rgba(255,34,51,.10),rgba(255,255,255,.03) 45%,rgba(0,0,0,.25));border:1px solid rgba(255,60,70,.28);border-top-color:rgba(255,130,130,.45);border-radius:24px;padding:26px;position:relative;overflow:hidden;backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 20px 60px rgba(0,0,0,.5);animation:heroIn .7s var(--ease) backwards}
+@keyframes heroIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.hero-card::before{content:'';position:absolute;top:0;left:24px;right:24px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,150,150,.7),transparent)}
+.hero-card::after{content:'';position:absolute;top:0;bottom:0;left:0;width:120px;background:linear-gradient(105deg,transparent,rgba(255,255,255,.09),transparent);transform:translateX(-220px) skewX(-15deg);animation:shine 7s ease-in-out infinite}
+@keyframes shine{0%,55%{transform:translateX(-220px) skewX(-15deg)}90%,100%{transform:translateX(1200px) skewX(-15deg)}}
+.hero-card h1{font-size:28px;line-height:1.15;filter:drop-shadow(0 4px 22px rgba(255,20,40,.35))}.hero-card h1 em{font-style:normal;background:linear-gradient(100deg,#fff 10%,#ff9aa2 45%,#ff2233 80%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-card p{color:var(--mut);margin-top:10px;font-size:14.5px;line-height:1.65}.hero-card p b{color:var(--txt)}
+.badges{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.badge{font-size:12px;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--mut);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:all .3s var(--ease)}.badge:hover{transform:translateY(-2px);border-color:rgba(255,70,80,.55);box-shadow:0 8px 18px rgba(255,20,40,.2)}.badge b{color:#fff}
+.side{display:grid;gap:10px}
+.cmd{background:rgba(255,255,255,.03);border:1px dashed rgba(255,70,80,.35);border-radius:16px;padding:12px 14px;font-size:13.5px;color:var(--mut);line-height:1.7;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:border-color .3s,box-shadow .3s}
+.cmd:hover{border-color:rgba(255,70,80,.6);box-shadow:0 0 24px rgba(255,20,40,.12)}
+.cmd code{color:#ffb3ba;background:rgba(255,34,51,.14);border:1px solid rgba(255,60,70,.3);padding:2px 8px;border-radius:8px;font-weight:800}
+.warn{background:rgba(255,20,40,.07);border:1px solid rgba(255,60,70,.4);animation:warnPulse 3.2s ease-in-out infinite}
+@keyframes warnPulse{0%,100%{box-shadow:0 0 0 rgba(255,20,40,0)}50%{box-shadow:0 0 26px rgba(255,20,40,.18)}}
+.sect{margin:28px 0 4px;display:flex;align-items:center;gap:12px;animation:fadeDown .45s var(--ease) backwards}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+.sect h2{font-size:18px;white-space:nowrap;display:flex;align-items:center;gap:10px;text-shadow:0 0 20px rgba(255,34,51,.3)}.sect h2::before{content:'';width:5px;height:22px;border-radius:99px;background:linear-gradient(180deg,#ff5b68,#8f0f1d);box-shadow:0 0 12px rgba(255,34,51,.8)}
+.sect .line{flex:1;height:1px;background:linear-gradient(90deg,rgba(255,45,60,.5),rgba(255,45,60,.05))}
+.sect .n{font-size:12px;background:rgba(255,34,51,.1);border:1px solid rgba(255,60,70,.4);color:#ffb3ba;padding:4px 11px;border-radius:999px;font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(172px,1fr));gap:14px;margin:14px 0 8px}
+.card{background:linear-gradient(165deg,rgba(255,34,51,.10),rgba(255,255,255,.03) 42%,rgba(0,0,0,.28));border:1px solid rgba(255,60,70,.20);border-top-color:rgba(255,130,130,.35);border-radius:var(--radius);padding:18px 12px 15px;text-align:center;cursor:pointer;position:relative;overflow:hidden;backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 12px 32px rgba(0,0,0,.5);transition:transform .38s var(--ease),box-shadow .38s,border-color .38s;animation:cardIn .55s var(--ease) backwards}
+@keyframes cardIn{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:none}}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:46%;background:linear-gradient(180deg,rgba(255,255,255,.07),transparent);pointer-events:none}
+.card::after{content:'';position:absolute;top:0;bottom:0;left:0;width:90px;background:linear-gradient(105deg,transparent,rgba(255,255,255,.10),transparent);transform:translateX(-160px) skewX(-15deg);transition:transform .8s ease;pointer-events:none}
+.card:hover{transform:translateY(-7px) scale(1.025);border-color:rgba(255,70,80,.6);box-shadow:0 22px 50px rgba(255,20,40,.25),inset 0 1px 0 rgba(255,255,255,.14)}
+.card:hover::after{transform:translateX(320px) skewX(-15deg)}
+.card.leg:hover{border-color:#ff2233;box-shadow:0 22px 55px rgba(255,20,40,.4),inset 0 1px 0 rgba(255,255,255,.16)}
+.card.chaos:hover{border-color:#e07bff;box-shadow:0 22px 55px rgba(190,90,255,.32),inset 0 1px 0 rgba(255,255,255,.14)}
+.card.def:hover{border-color:#3dff8a;box-shadow:0 22px 55px rgba(61,255,138,.22),inset 0 1px 0 rgba(255,255,255,.14)}
+.card img{width:68px;height:68px;image-rendering:pixelated;object-fit:contain;filter:drop-shadow(0 8px 14px rgba(0,0,0,.6));transition:transform .45s var(--ease),filter .45s;position:relative;z-index:1}
+.card:hover img{transform:scale(1.16) rotate(-4deg);filter:drop-shadow(0 0 16px rgba(255,40,55,.6))}
+.card.pot img{filter:drop-shadow(0 8px 14px rgba(0,0,0,.6)) saturate(1.4)}
+.card img[src*="assets/donat/"]{background:#000;border-radius:16px;padding:5px;border:1px solid rgba(255,60,70,.25);box-shadow:0 0 18px rgba(255,20,40,.18)}
+.card img[src*="assets/yt/"]{border-radius:50%;border:2px solid rgba(255,70,80,.55);box-shadow:0 0 22px rgba(255,20,40,.4);background:#0a0a0c}
+.card h3{font-size:14.5px;margin:10px 0 6px;line-height:1.25;min-height:36px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1}
+.pill{font-size:10.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;padding:5px 11px;border-radius:999px;display:inline-block;border:1px solid;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);position:relative;z-index:1}
+.p-spec{background:rgba(255,34,51,.16);color:#ff9aa4;border-color:rgba(255,60,70,.5)}
+.p-def{background:rgba(61,255,138,.10);color:#7dffab;border-color:rgba(61,255,138,.4)}
+.p-misc{background:rgba(255,120,60,.13);color:#ffb08a;border-color:rgba(255,120,60,.45)}
+.p-leg{background:linear-gradient(135deg,rgba(255,34,51,.35),rgba(125,12,25,.35));color:#fff;border-color:rgba(255,120,130,.65);box-shadow:0 0 14px rgba(255,20,40,.3)}
+.p-chaos{background:rgba(190,110,255,.13);color:var(--violet);border-color:rgba(190,110,255,.45)}
+.p-prot{background:rgba(255,200,200,.08);color:#ffd7db;border-color:rgba(255,150,150,.4)}
+.p-pot{background:rgba(255,34,51,.12);color:#ff8f99;border-color:rgba(255,60,70,.45)}
+.p-deb{background:rgba(120,5,15,.45);color:#ff7a86;border-color:rgba(255,60,70,.5)}
+.card p{font-size:12px;color:var(--mut);margin-top:8px;line-height:1.5;min-height:36px;position:relative;z-index:1}
+.price{margin-top:8px;font-size:12.5px;font-weight:800;color:#fff;text-shadow:0 0 14px rgba(255,34,51,.7);position:relative;z-index:1}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:middle}
+/* modal */
+.overlay{position:fixed;inset:0;background:rgba(5,1,2,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:none;align-items:center;justify-content:center;padding:16px;z-index:60}
+.overlay.open{display:flex}
+.overlay.open .modal{animation:modalIn .5s var(--ease) backwards}
+.modal{max-width:640px;width:100%;max-height:90vh;overflow:auto;background:linear-gradient(170deg,rgba(46,10,15,.94),rgba(12,8,10,.96));border:1px solid rgba(255,60,70,.4);border-top-color:rgba(255,140,140,.5);border-radius:26px;box-shadow:0 30px 90px rgba(0,0,0,.7),0 0 60px rgba(255,20,40,.18),inset 0 1px 0 rgba(255,255,255,.12);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+@keyframes modalIn{0%{opacity:0;transform:translateY(30px) scale(.94)}60%{opacity:1;transform:translateY(-5px) scale(1.012)}100%{transform:none}}
+.m-head{display:flex;gap:16px;padding:22px;background:linear-gradient(180deg,rgba(255,34,51,.10),transparent);border-bottom:1px solid rgba(255,60,70,.25);position:sticky;top:0;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:2}
+.m-head img{width:88px;height:88px;image-rendering:pixelated;background:rgba(0,0,0,.5);border:1px solid rgba(255,70,80,.45);border-radius:20px;padding:10px;flex-shrink:0;box-shadow:0 0 26px rgba(255,20,40,.3);animation:bob 3.4s ease-in-out infinite}
+.m-head img[src*="assets/yt/"]{border-radius:50%;padding:0;image-rendering:auto}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.m-head h2{font-size:22px;line-height:1.2;text-shadow:0 0 24px rgba(255,34,51,.4)}.m-head .sub{color:var(--mut);font-size:13.5px;margin-top:7px;line-height:1.55}
+.m-body{padding:20px;display:grid;gap:12px;font-size:14px;line-height:1.62}
+.kv{background:rgba(255,255,255,.035);border:1px solid rgba(255,60,70,.22);border-radius:15px;padding:12px 14px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:transform .3s var(--ease),border-color .3s,box-shadow .3s}
+.kv:hover{transform:translateX(4px);border-color:rgba(255,70,80,.5);box-shadow:0 6px 20px rgba(255,20,40,.12)}
+.kv b{color:#ff8f99}
+.eff{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+.eff span{background:rgba(0,0,0,.45);border:1px solid var(--line);border-radius:999px;padding:6px 11px;font-size:12px;font-weight:600;animation:chipIn .45s var(--ease) backwards}
+.eff span:nth-child(1){animation-delay:.05s}.eff span:nth-child(2){animation-delay:.1s}.eff span:nth-child(3){animation-delay:.15s}.eff span:nth-child(4){animation-delay:.2s}.eff span:nth-child(5){animation-delay:.25s}.eff span:nth-child(6){animation-delay:.3s}.eff span:nth-child(n+7){animation-delay:.35s}
+@keyframes chipIn{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:none}}
+.eff .neg{border-color:rgba(255,60,70,.6);color:#ff9aa5;box-shadow:0 0 10px rgba(255,20,40,.12)}.eff .pos{border-color:rgba(61,255,138,.55);color:#8affb3}.eff .neu{border-color:rgba(255,170,80,.55);color:#ffcf9a}
+.m-foot{display:flex;gap:10px;padding:0 20px 20px;flex-wrap:wrap}
+.btn{flex:1;min-width:150px;text-align:center;padding:13px;border-radius:14px;border:1px solid rgba(255,60,70,.35);background:rgba(255,255,255,.04);color:var(--txt);cursor:pointer;font-weight:800;font-size:14px;transition:all .3s var(--ease);position:relative;overflow:hidden}
+.btn:hover{transform:translateY(-2px);border-color:rgba(255,80,90,.7);box-shadow:0 10px 24px rgba(255,20,40,.2)}
+.btn.primary{background:linear-gradient(135deg,#ff2b3d,#8f0f1d);border-color:rgba(255,130,140,.6);color:#fff;box-shadow:0 10px 30px rgba(255,20,40,.4),inset 0 1px 0 rgba(255,255,255,.35)}
+.btn.primary:hover{box-shadow:0 14px 36px rgba(255,20,40,.55),inset 0 1px 0 rgba(255,255,255,.4);filter:brightness(1.1)}
+.btn.primary::after{content:'';position:absolute;top:0;bottom:0;left:0;width:70px;background:linear-gradient(105deg,transparent,rgba(255,255,255,.35),transparent);transform:translateX(-120px) skewX(-15deg);transition:transform .7s ease}
+.btn.primary:hover::after{transform:translateX(400px) skewX(-15deg)}
+.trap-skins{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+@media(max-width:520px){.trap-skins{grid-template-columns:1fr}}
+.ts{background:rgba(0,0,0,.4);border:1px solid rgba(255,60,70,.22);border-radius:12px;padding:9px 11px;font-size:12.5px;transition:all .3s var(--ease)}.ts:hover{border-color:rgba(255,70,80,.55);transform:translateY(-2px)}.ts b{color:#fff}
+footer{color:var(--mut);font-size:12.5px;text-align:center;padding:26px 0 46px;line-height:1.8}
+a{color:#ff7a86;text-decoration:none}
+.empty{text-align:center;color:var(--mut);padding:30px;border:1px dashed rgba(255,60,70,.4);border-radius:18px;margin:14px 0;background:rgba(255,34,51,.04);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}}
+.welcome{position:fixed;inset:0;background:rgba(5,1,2,.8);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);display:none;align-items:center;justify-content:center;padding:18px;z-index:100}
+.welcome.open{display:flex}
+.welcome.open .w-box{animation:modalIn .6s var(--ease) backwards}
+.w-box{max-width:480px;width:100%;text-align:center;background:linear-gradient(170deg,rgba(52,11,17,.96),rgba(12,8,10,.97));border:1px solid rgba(255,60,70,.45);border-top-color:rgba(255,150,150,.55);border-radius:28px;padding:34px 28px 26px;box-shadow:0 30px 90px rgba(0,0,0,.7),0 0 70px rgba(255,20,40,.22),inset 0 1px 0 rgba(255,255,255,.12);position:relative;overflow:hidden}
+.w-box::before{content:'';position:absolute;top:0;left:30px;right:30px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,150,150,.8),transparent)}
+.w-box::after{content:'';position:absolute;top:-70px;left:50%;width:280px;height:140px;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(255,30,45,.35),transparent 70%);filter:blur(20px);pointer-events:none}
+.w-logo{width:104px;height:104px;border-radius:28px;object-fit:cover;border:1px solid rgba(255,130,140,.6);box-shadow:0 0 0 1px rgba(255,60,70,.35),0 0 44px rgba(255,20,40,.6);animation:bob 3.4s ease-in-out infinite}
+.w-eyebrow{margin-top:14px;font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#ff8f99}
+.w-title{font-size:27px;margin-top:6px;background:linear-gradient(100deg,#fff 15%,#ff9aa2 50%,#ff2233 85%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 20px rgba(255,20,40,.35))}
+.w-author{margin-top:12px;font-size:14px;color:var(--mut)}.w-author b{color:#fff;font-size:16px;text-shadow:0 0 16px rgba(255,34,51,.6)}
+.w-copy{background:rgba(255,34,51,.14);border:1px solid rgba(255,60,70,.4);color:#ffb3ba;border-radius:9px;padding:3px 9px;margin-left:8px;cursor:pointer;font-size:13px;transition:all .25s}
+.w-copy:hover{background:rgba(255,34,51,.3);transform:translateY(-1px)}
+.w-text{margin-top:14px;font-size:13.5px;line-height:1.75;color:var(--mut)}
+.w-text code{display:inline-block;margin-top:8px;color:#ffb3ba;background:rgba(255,34,51,.14);border:1px solid rgba(255,60,70,.35);padding:6px 14px;border-radius:10px;font-weight:800;font-size:14px}
+.w-btns{margin-top:14px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<div class="top">
+<div class="logo"><img class="logo-img" src="assets/logo-funtime.png" alt="FunTime"><div><b>Fun<i>Time</i> Mini Wiki</b><small>спец • сферы • талисманы • зелья — сверено 10.10.2026</small></div></div>
+<div class="search"><span>🔎</span><input id="q" placeholder="Поиск: трапка, дезка, хаос, божка, вихрь, радиация..."></div>
+</div>
+<div class="filters" id="tabs">
+<div class="tab active" data-f="all">Все<small id="c-all"></small></div>
+<div class="tab" data-f="spec">Спец-предметы<small id="c-spec"></small></div>
+<div class="tab" data-f="sphere">Сферы<small id="c-sphere"></small></div>
+<div class="tab" data-f="tal">Талисманы<small id="c-tal"></small></div>
+<div class="tab" data-f="pot">Зелья<small id="c-pot"></small></div>
+<div class="tab" data-f="donat">Донат<small id="c-donat"></small></div>
+<div class="tab" data-f="yt">Ютуберы<small id="c-yt"></small></div>
+<div class="count" id="count"></div>
+</div>
+<div class="filters" id="rars">
+<button class="rar active" data-r="all">Любая редкость</button>
+<button class="rar" data-r="leg">Легендарные</button>
+<button class="rar" data-r="chaos">Хаос</button>
+<button class="rar" data-r="prot">Защитные</button>
+</div>
+</div></header>
+
+<div class="wrap">
+<div class="hero">
+<div class="hero-card">
+<h1>Все предметы FunTime <em>как в игре</em></h1>
+<p>Иконки — те же файлы, что на официальных статьях <b>funtime.wiki</b>, но лежат локально в папке сайта. Клик по карточке открывает мини-вики: эффекты, радиус, КД, цена в ТК, где выбить, чем контрить и мета-связки с YouTube.</p>
+<div class="badges"><div class="badge"><b>7</b> спец-предметов</div><div class="badge"><b>7</b> сфер</div><div class="badge"><b>8</b> талисманов</div><div class="badge"><b>6</b> донат-зелий</div><div class="badge"><b>22</b> донат-товара</div><div class="badge"><b>12</b> ютуберов</div><div class="badge">Афина и Титан — убраны</div></div>
+</div>
+<div class="side">
+<div class="cmd">Крафты спец-предметов в игре: <code>/crafts → Спец.предметы</code><br>Скины трапки: <code>/trapskins</code> • Аук: <code>/ah</code> • Донат-шоп: <code>/donshop</code></div>
+<div class="cmd">Сферы/талисманы: <code>/extra</code> • БП: <code>/bp</code> • Лотерея: <code>/lottery</code> • Тайник: <code>/warp stash</code></div>
+</div>
+</div>
+
+<div id="sections"></div>
+<footer>Источники: funtime.wiki/article/special-items, spheres, talismans, potions, brewery (обновлено 10 октября) • forum.funtime.su • YouTube-разборы меты.<br>Фанатский гайд. Иконки принадлежат FunTime / Mojang. Не аффилирован.</footer>
+</div>
+
+<div class="overlay" id="overlay"><div class="modal" id="modal"></div></div>
+<div class="welcome" id="welcome"><div class="w-box">
+<img class="w-logo" src="assets/logo-funtime.png" alt="FunTime">
+<div class="w-eyebrow">Добро пожаловать</div>
+<h2 class="w-title">FunTime Mini Wiki</h2>
+<div class="w-author">Автор проекта — <b id="w-nick">trofintini1520</b><button class="w-copy" onclick="copyName('trofintini1520')" title="Скопировать ник">⧉</button></div>
+<p class="w-text">Собрал все спец-предметы, сферы, талисманы, зелья, донат и ютуберов в одном месте — сверено с игрой на октябрь 2026.<br><br>Если вики помогла — поддержи автора любой копейкой, буду безмерно благодарен! Проще всего прямо в игре:<br><code>/pay trofintini1520 [сумма]</code></p>
+<div class="w-btns"><button class="btn primary" onclick="closeWelcome()">Перейти к вики</button></div>
+</div></div>
+
+<script>
+const POT_IMG='assets/zelye.webp';
+const ITEMS=[
+// ===== СПЕЦ 7 =====
+{id:'dez',cat:'spec',rar:'',name:'Дезориентация',pill:'ПвП • спец',cls:'p-spec',img:'assets/dezorientaciya.png',short:'Звуковая волна: слепота + тошнота, радиус 10',desc:'Кидаешь око — всех врагов в радиусе 10 блоков накрывает пачкой дебафов. Главная открывашка файта и анти-инвиз связка.',effects:[['Слепота II','neg'],['Тошнота','neg'],['Замедление IV-V 4с','neg'],['Усталость V 4с','neg'],['Иссушение II 9с','neg']],info:{'Радиус':'9–10 блоков, чем ближе — тем дольше висит','Кулдаун':'~45–60 сек','Ванильный предмет':'Око Эндера','Где взять':'/crafts → Спец.предметы, /ah, ивенты','Контрится':'Божья Аура (молоко снимает не всё)','Как играть':'Кинь первой → сразу явку для подсветки → смерч в лицо'}},
+{id:'dust',cat:'spec',rar:'',name:'Явная пыль',pill:'ПвП • спец',cls:'p-spec',img:'assets/yavnaya-pyl.webp',short:'Вспышка на 10 блоков, вешает Glowing',desc:'Сахарок-палево. Даёт всем вокруг Свечение — видно даже инвизов сквозь блоки. Мастхэв на ивенты.',effects:[['Свечение (Glowing)','neg'],['Видно сквозь блоки','neg'],['Звук дракона + кольцо частиц','neu']],info:{'Радиус':'10 блоков','Длительность':'в упор дольше, в броне висит дольше (~до 45с по мете)','Ванильный предмет':'Сахар','Где взять':'/crafts, /ah','Контрится':'только Божья Аура','Как играть':'После дезки — слепой + светящийся никуда не денется'}},
+{id:'smerch',cat:'spec',rar:'',name:'Огненный смерч',pill:'ПвП • спец',cls:'p-spec',img:'assets/ognenny-smerch.webp',short:'Шар с уроном, поджогом и сносом брони',desc:'На вики 10.10 подписан как Огненный шар, в игре и на ютубе — смерч. Это один предмет. Летит в цель, поджигает и люто ломает броню.',effects:[['Урон + поджог ~10с','neg'],['Снос прочности брони','neg'],['Дебафы при попадании','neg']],info:{'Ванильный предмет':'Огненный заряд','Где взять':'/crafts, /ah','Комбо':'дезка → явка → смерч → трапка','Контрится':'Божка + Огнестойкость II частично'}},
+{id:'trap',cat:'spec',rar:'',name:'Трапка',pill:'Защита • спец',cls:'p-def',img:'assets/trapka.webp',short:'Нерушимая клетка-купол на 15 секунд',desc:'Ставишь под себя или врага — вырастает купол на 15 сек. Визуал меняется командой /trapskins, у скинов — свои эффекты.',effects:[['Купол 15 сек','neg'],['Скины с эффектами','neu']],info:{'Длительность':'15 сек','Команда':'/trapskins','Где взять':'/crafts, /ah'},skins:[['Жемчужная','иссушение врагам'],['Мучительная','иссушение врагам'],['Царская','спешка всем'],['Призрачная','авто-эффект явной пыли'],['Сингулярная','слепота врагам 3с'],['Неизбежная','КД хорус 10с, почти без дырок'],['Мистическая','КД эндер-перл 10с'],['Ледяная','реген тиммейтам'],['Драконья','стан + замедление + КД перл/хорус'],['Без эффекта','Обычная, Кошмарная, Зловещая, Смертельная, Жестокая, Коварная, Проклятая']]},
+{id:'plast',cat:'spec',rar:'',name:'Пласт',pill:'Защита • спец',cls:'p-def',img:'assets/plast.webp',short:'Нерушимая стена: 20с вертикаль / 60с горизонталь',desc:'Стена из ниоткуда. Вертикально — отгородиться в поле, горизонтально — перекрыть проход на целую минуту.',effects:[['Вертикальная — 20с','neu'],['Горизонтальная — 60с','neu']],info:{'Ванильный предмет':'Сушёная ламинария','Где взять':'/crafts, /ah','Важно':'Ставится только на твёрдый блок, в воздухе — нет. Не ставится? Убери моды на ПКМ по воздуху','Комбо':'пласт поперёк прохода + трапка внутрь'}},
+{id:'freeze',cat:'spec',rar:'',name:'Снежок заморозка',pill:'Контроль • спец',cls:'p-misc',img:'assets/snezhok-zamorozka.webp',short:'Бросок с заморозкой в радиусе 5–7',desc:'Кидаешь снежок — всех в радиусе станит: почти не двигаются, не прыгают, светятся.',effects:[['Замедление XI 5с','neg'],['Усталость XI 5с','neg'],['Блок прыжков','neg'],['Свечение 5с','neg']],info:{'Радиус':'5–7 блоков','Кулдаун':'~10 сек','Особенность':'В воде прыжки НЕ блочатся — можно всплыть, лёд тает','Где взять':'/crafts, /ah'}},
+{id:'bozhka',cat:'spec',rar:'',name:'Божья Аура',pill:'Сейв • спец',cls:'p-misc',img:'assets/bozhya-aura.webp',short:'Снимает все дебафы, даёт God-бафы',desc:'Панацея FunTime. Сбрасывает дезку, явку, смерч, радиацию и снотворное, взамен вешает свои топ-бафы.',effects:[['Сброс всех дебафов','pos'],['Невидимость 04:00','pos'],['Сила II 03:00','pos'],['Скорость II 03:00','pos']],info:{'Когда жать':'Сразу после вражеской дезки/явки/радиации','Где взять':'/crafts, /ah, ивенты, данжи','Совет меты':'Держи 1–2 шт в хотбаре, без неё в соло-файт не иди'}},
+// ===== СФЕРЫ 7 (без Афины/Титана, Хаос/Бестия исправлены по DOM вики) =====
+{id:'chaos',cat:'sphere',rar:'chaos',name:'Сфера Хаоса',pill:'Хаос • сфера',cls:'p-chaos',img:'assets/sfera-haosa.png',short:'Мета: +2.5 урон, +13% скор. атаки',desc:'Самая популярная в PvP-инвентарях за 50–250кк по ютубу. Хаос режет хп, но даёт натиск.',effects:[['Урон +2.5','pos'],['Скор. атаки +13%','pos'],['Скорость +7%','pos'],['Броня +1.5','pos'],['Гравитация +9%','neu'],['ХП −4','neg']],info:{'Цена':'6 790 ТК','Где взять':'донат-шоп, ивенты, кейс со сферами, /ah, тайник /warp stash','Держится':'Во 2-й руке, не дропается при смерти'}},
+{id:'satir',cat:'sphere',rar:'chaos',name:'Сфера Сатира',pill:'Хаос • сфера',cls:'p-chaos',img:'assets/sfera-satira.png',short:'+2 урон, +15% скор. атаки, −10% прыжок',desc:'Шёпот Сатира ускоряет расправу, но сковывает прыжок.',effects:[['Урон +2','pos'],['Скор. атаки +15%','pos'],['Сила прыжка −10%','neg']],info:{'Цена':'3 790 ТК','Где взять':'донат-шоп, ивенты, /ah'}},
+{id:'bestia',cat:'sphere',rar:'prot',name:'Сфера Бестии',pill:'Защитная • сфера',cls:'p-prot',img:'assets/sfera-bestii.png',short:'+4 хп, +1 броня, +10% скорость',desc:'Звериная мощь. Универсальная защитная для ивентов и фарма. Иконка — chaos.png как на вики.',effects:[['ХП +4','pos'],['Броня +1','pos'],['Скорость +10%','pos'],['Скор. атаки +10%','pos']],info:{'Цена':'3 790 ТК','Где взять':'в т.ч. /bp за боевой баланс, ивенты, /ah'}},
+{id:'ares',cat:'sphere',rar:'chaos',name:'Сфера Ареса',pill:'Хаос • сфера',cls:'p-chaos',img:'assets/sfera-aresa.png',short:'+6 урон, −2 броня, −2 хп',desc:'Стеклянная пушка. Максимум урона среди сфер.',effects:[['Урон +6','pos'],['Броня −2','neg'],['ХП −2','neg']],info:{'Цена':'3 790 ТК','Комбо':'Арес + Талисман Карателя / Раздора'}},
+{id:'gidra',cat:'sphere',rar:'prot',name:'Сфера Гидры',pill:'Защитная • сфера',cls:'p-prot',img:'assets/sfera-gidry.png',short:'+4 хп, +2 броня, вода-бафы',desc:'Живучесть глубин. Для воды: дыхание и копка.',effects:[['ХП +4','pos'],['Броня +2','pos'],['Копка под водой +50%','pos'],['Кислород +50%','pos']],info:{'Цена':'3 790 ТК'}},
+{id:'ikar',cat:'sphere',rar:'chaos',name:'Сфера Икара',pill:'Хаос • сфера',cls:'p-chaos',img:'assets/sfera-ikara.png',short:'+2 урон, +2 хп',desc:'Воля Икара. Дешёвая и злая, хороша на старт.',effects:[['Урон +2','pos'],['ХП +2','pos']],info:{'Цена':'2 790 ТК','Где взять':'в т.ч. /bp'}},
+{id:'erida',cat:'sphere',rar:'prot',name:'Сфера Эрида',pill:'Защитная • сфера',cls:'p-prot',img:'assets/sfera-erida.png',short:'Везение +1, +2 хп, дистанция +1',desc:'Холод Эриды. Для фарма, рыбалки и PvE.',effects:[['Везение +1','pos'],['ХП +2','pos'],['Дистанция +1','pos']],info:{'Цена':'2 790 ТК','Где взять':'в т.ч. /bp'}},
+// ===== ТАЛИСМАНЫ 8 =====
+{id:'krush',cat:'tal',rar:'leg',name:'Талисман Крушителя',pill:'Легендарный • талисман',cls:'p-leg',img:'assets/talisman-krushitelya.png',short:'+4 хп, +3 урон, +2 броня/стойкость',desc:'Легендарный символ. Несокрушимая мощь, ломающая преграды.',effects:[['ХП +4','pos'],['Урон +3','pos'],['Броня +2','pos'],['Стойкость +2','pos']],info:{'Цена':'18 900 ТК — самый дорогой','Где взять':'донат-шоп, /ah, ивенты (мистик/маяк)'}},
+{id:'kara',cat:'tal',rar:'leg',name:'Талисман Карателя',pill:'Легендарный • талисман',cls:'p-leg',img:'assets/talisman-karatelya.png',short:'+7 урон, +10% скорость, −4 хп',desc:'Строгий приговор. Только боевой пропуск.',effects:[['Урон +7','pos'],['Скорость +10%','pos'],['ХП −4','neg']],info:{'Где взять':'только /bp + /ah'}},
+{id:'razdor',cat:'tal',rar:'chaos',name:'Талисман Раздора',pill:'Хаос • талисман',cls:'p-chaos',img:'assets/talisman-razdora.png',short:'+4 урон, +10% скорость/атаки, −3 броня',desc:'Раздор жаждет хаоса, даруя безумный темп, но разрушая броню.',effects:[['Урон +4','pos'],['ХП +2','pos'],['Скорость +10%','pos'],['Скор. атаки +10%','pos'],['Броня −3','neg']],info:{'Цена':'5 790 ТК'}},
+{id:'tiran',cat:'tal',rar:'chaos',name:'Талисман Тирана',pill:'Хаос • талисман',cls:'p-chaos',img:'assets/talisman-tirana.png',short:'+2 урон, +2 броня, −4 хп',desc:'Тиран подавляет слабых. Даёт защиту и силу, взимая кровавый налог.',effects:[['Урон +2','pos'],['Броня +2','pos'],['ХП −4','neg']],info:{'Цена':'5 790 ТК'}},
+{id:'yarost',cat:'tal',rar:'chaos',name:'Талисман Ярости',pill:'Хаос • талисман',cls:'p-chaos',img:'assets/talisman-yarosti.png',short:'+5 урон, −4 хп',desc:'Чистая, дикая агрессия. Граничит с безумием, меняя жизнь на урон.',effects:[['Урон +5','pos'],['ХП −4','neg']],info:{'Цена':'5 790 ТК','Где взять':'в т.ч. /bp'}},
+{id:'vihr',cat:'tal',rar:'prot',name:'Талисман Вихря',pill:'Защитный • талисман',cls:'p-prot',img:'assets/talisman-vihrya.png',short:'+2 хп, +15% скорость и атаки',desc:'Вихрь не знает покоя, ускоряя владельца и закаляя его дух.',effects:[['ХП +2','pos'],['Скорость +15%','pos'],['Скор. атаки +15%','pos']],info:{'Цена':'5 790 ТК','Где взять':'в т.ч. /bp'}},
+{id:'mrak',cat:'tal',rar:'prot',name:'Талисман Мрака',pill:'Защитный • талисман',cls:'p-prot',img:'assets/talisman-mraka.png',short:'+1.5 броня, +1.5 хп',desc:'Мрак сгущается рядом, укрывая владельца и питая его силы.',effects:[['Броня +1.5','pos'],['ХП +1.5','pos']],info:{'Цена':'5 790 ТК','Где взять':'в т.ч. /bp'}},
+{id:'demon',cat:'tal',rar:'chaos',name:'Талисман Демона',pill:'Хаос • талисман',cls:'p-chaos',img:'assets/talisman-demona.png',short:'+2.5 урон, +10% скор. атаки',desc:'Печать разжигает ярость, ускоряя удары сердца и силу каждой атаки.',effects:[['Урон +2.5','pos'],['Скор. атаки +10%','pos']],info:{'Цена':'5 790 ТК'}},
+// ===== ЗЕЛЬЯ /donshop — как на FunTime =====
+{id:'svyat',cat:'pot',rar:'',name:'Святая Вода',pill:'Баф • /donshop',cls:'p-pot',img:'assets/zelye-svyataya-voda.png',short:'Хил-баф • 1 790 ТК • была понерфлена',desc:'Раньше имба с Регенерацией III на минуту, после нерфа весной 2026 стала слабее. Сейчас плюс — если у тима исцел в КД, а надо хелпануть. Всё ещё мастхэв в инвентарях ютуберов.',effects:[['Исцеление','pos'],['Регенерация (ослаблена)','pos']],info:{'Цена':'1 790 ТК','Нерф':'март 2026 — убрали Реген III 1:00, теперь слабее','Где взять':'/donshop, данжи, /ah ~500–800к','Тип':'Баф на себя/тим'}},
+{id:'hlop',cat:'pot',rar:'',name:'Хлопушка',pill:'Баф • /donshop',cls:'p-pot',img:'assets/zelye-hlopushka.png',short:'Стартовый баф • 1 490 ТК',desc:'Самое дешёвое донат-зелье. По форуму — мем для сравнения силы других зелий. Бери на старт, пока нет денег на топ-бафы.',effects:[['Замедление X · 00:10','neg'],['Скорость V · 00:20','pos'],['Слепота X · 00:05','neg'],['Свечение · 03:00','neu']],info:{'Цена':'1 490 ТК','Где взять':'/donshop, ивенты, данжи','Тип':'Питьевое, баф на себя','При применении':'Скорость −150%, Скорость +100% (да, так в игре)'}},
+{id:'pal',cat:'pot',rar:'',name:'Зелье Паладина',pill:'Баф • защита',cls:'p-pot',img:'assets/zelye-paladina.png',short:'Деф-баф • 2 490 ТК',desc:'Защитный донат-баф. Берут в каждый PvP-инвентарь наравне с Ассасином и Святой Водой. Падает с данжей 1.21, поэтому подешевело.',effects:[['Сопротивление · 10:00','pos'],['Огнестойкость · 10:00','pos'],['Прилив здоровья III · 01:00','pos'],['Невидимость · 15:00','pos']],info:{'Цена':'2 490 ТК','Где взять':'/donshop, медный данж / город Вардена, /ah','Тип':'Питьевое, пить перед врывом','При применении':'+12 максимальное здоровье'}},
+{id:'ass',cat:'pot',rar:'',name:'Зелье Ассасина',pill:'Баф • скорость',cls:'p-pot',img:'assets/zelye-assasina.png',short:'Скорость/инвиз-баф • 2 490 ТК',desc:'Мета для крысы и обхода. Ютуберы кладут в каждый набор за 50/100/250кк. Контрится только явкой.',effects:[['Сила IV · 01:00','pos'],['Скорость III · 05:00','pos'],['Спешка · 01:00','pos'],['Моментальный урон II','neu']],info:{'Цена':'2 490 ТК','Где взять':'/donshop, данжи, /ah','Контрится':'Явная пыль','При применении':'+12 урон при атаке, +60% скорость, +10% скорость атаки'}},
+{id:'rad',cat:'pot',rar:'',name:'Зелье Радиации',pill:'Дебаф • взрывное',cls:'p-deb',img:'assets/zelye-radiacii.png',short:'Взрывной дебаф во врага • 2 490 ТК',desc:'Кидается во врага. Топеры носят минимум по 3 шт. После неё враг вынужден жать Божку, а вторую Божку уже не нажмёшь — на ней КД.',effects:[['Отравление II · 01:00','neg'],['Иссушение II · 01:00','neg'],['Замедление III · 01:30','neg'],['Голод V · 01:00','neg'],['Свечение · 02:00','neg']],info:{'Цена':'2 490 ТК','Где взять':'/donshop, данжи (лежит почти в каждом сундуке), киты, /ah','Тип':'Взрывное, кидать во врага','Снимается':'Божья Аура / молоко','При применении':'Скорость −45%','Форум':'Просят КД 45с на повторный кидок'}},
+{id:'snot',cat:'pot',rar:'',name:'Снотворное',pill:'Дебаф • взрывное',cls:'p-deb',img:'assets/zelye-snotvornoe.png',short:'Взрывной контроль • 2 490 ТК',desc:'Второй главный дебаф наряду с Радиацией. Даёт слепоту и контроль, враг не может пить перл/есть морковь. Самому выше Слабости I не сварить — только донат.',effects:[['Слабость II · 01:30','neg'],['Утомление II · 00:10','neg'],['Иссушение III · 01:30','neg'],['Слепота · 00:10','neg']],info:{'Цена':'2 490 ТК','Где взять':'/donshop, данжи, киты (часть убрали, заменили радиацией), /ah','Тип':'Взрывное, кидать во врага','Снимается':'Божья Аура','При применении':'−8 урон при атаке, −20% скорость атаки'}},
+];
+const DONAT=[
+{id:'d-baron',cat:'donat',rar:'',name:'Барон',pill:'Привилегия • донат',cls:'p-leg',img:'assets/donat/donat-priv-baron.png',short:'от 49 ₽ • 30 / 90 дней / навсегда',desc:'Стартовая привилегия: префикс [Барон], /kit Барон, /salary, /crawl, 2 точки дома, 3 региона, 6 слотов аукциона, задержка телепорта 7 сек.',effects:[['Сроки: 30 / 90 / навсегда','neu'],['Докуп со скидкой','pos']],info:{'Цена':'от 49 ₽','Сроки':'30 дней / 90 дней / навсегда','Где купить':'funtime.su и /dm (за монеты)','Промокод':'−15% по промокодам ютуберов'}},
+{id:'d-strazh',cat:'donat',rar:'',name:'Страж',pill:'Привилегия • донат',cls:'p-leg',img:'assets/donat/donat-priv-strazh.webp',short:'от 89 ₽ • 30 / 90 дней / навсегда',desc:'Привилегия FunTime: префикс в чате и табе, киты, зарплата и повышенные лимиты. Точный список возможностей смотри на funtime.su при выборе товара.',effects:[['Сроки: 30 / 90 / навсегда','neu'],['Докуп со скидкой','pos']],info:{'Цена':'от 89 ₽','Сроки':'30 дней / 90 дней / навсегда','Где купить':'funtime.su и /dm (за монеты)','Промокод':'−15% по промокодам ютуберов'}},
+{id:'d-geroy',cat:'donat',rar:'',name:'Герой',pill:'Привилегия • донат',cls:'p-leg',img:'assets/donat/donat-priv-geroy.webp',short:'от 139 ₽ • 30 / 90 дней / навсегда',desc:'Привилегия FunTime: префикс в чате и табе, киты, зарплата и повышенные лимиты. Точный список возможностей смотри на funtime.su при выборе товара.',effects:[['Сроки: 30 / 90 / навсегда','neu'],['Докуп со скидкой','pos']],info:{'Цена':'от 139 ₽','Сроки':'30 дней / 90 дней / навсегда','Где купить':'funtime.su и /dm (за монеты)','Промокод':'−15% по промокодам ютуберов'}},
+{id:'d-aspid',cat:'donat',rar:'',name:'Аспид',pill:'Привилегия • донат',cls:'p-leg',img:'assets/donat/donat-priv-aspid.png',short:'от 179 ₽ • 30 / 90 дней / навсегда',desc:'Привилегия FunTime: префикс в чате и табе, киты, зарплата и повышенные лимиты. Точный список возможностей смотри на funtime.su при выборе товара.',effects:[['Сроки: 30 / 90 / навсегда','neu'],['Докуп со скидкой','pos']],info:{'Цена':'от 179 ₽','Сроки':'30 дней / 90 дней / навсегда','Где купить':'funtime.su и /dm (за монеты)','Промокод':'−15% по промокодам ютуберов'}},
+{id:'d-skvid',cat:'donat',rar:'',name:'Сквид',pill:'Привилегия • донат',cls:'p-leg',img:'assets/donat/donat-priv-skvid.png',short:'от 279 ₽ • 30 / 90 дней / навсегда',desc:'Привилегия FunTime: префикс в чате и табе, киты, зарплата и повышенные лимиты. Точный список возможностей смотри на funtime.su при выборе товара.',effects:[['Сроки: 30 / 90 / навсегда','neu'],['Докуп со скидкой','pos']],info:{'Цена':'от 279 ₽','Сроки':'30 дней / 90 дней / навсегда','Где купить':'funtime.su и /dm (за монеты)','Промокод':'−15% по промокодам ютуберов'}},
+{id:'d-glava',cat:'donat',rar:'',name:'Глава',pill:'Привилегия • донат',cls:'p-leg',img:'assets/donat/donat-priv-glava.png',short:'от 379 ₽ • 30 / 90 дней / навсегда',desc:'Привилегия FunTime: префикс в чате и табе, киты, зарплата и повышенные лимиты. Точный список возможностей смотри на funtime.su при выборе товара.',effects:[['Сроки: 30 / 90 / навсегда','neu'],['Докуп со скидкой','pos']],info:{'Цена':'от 379 ₽','Сроки':'30 дней / 90 дней / навсегда','Где купить':'funtime.su и /dm (за монеты)','Промокод':'−15% по промокодам ютуберов'}},
+{id:'d-elita',cat:'donat',rar:'',name:'Элита',pill:'Привилегия • донат',cls:'p-leg',img:'assets/donat/donat-priv-elita.png',short:'от 579 ₽ • 30 / 90 дней / навсегда',desc:'Привилегия FunTime: префикс в чате и табе, киты, зарплата и повышенные лимиты. Точный список возможностей смотри на funtime.su при выборе товара.',effects:[['Сроки: 30 / 90 / навсегда','neu'],['Докуп со скидкой','pos']],info:{'Цена':'от 579 ₽','Сроки':'30 дней / 90 дней / навсегда','Где купить':'funtime.su и /dm (за монеты)','Промокод':'−15% по промокодам ютуберов'}},
+{id:'d-titan',cat:'donat',rar:'',name:'Титан',pill:'Привилегия • донат',cls:'p-leg',img:'assets/donat/donat-priv-titan.png',short:'от 779 ₽ • 30 / 90 дней / навсегда',desc:'Привилегия FunTime: префикс в чате и табе, киты, зарплата и повышенные лимиты. Точный список возможностей смотри на funtime.su при выборе товара.',effects:[['Сроки: 30 / 90 / навсегда','neu'],['Докуп со скидкой','pos']],info:{'Цена':'от 779 ₽','Сроки':'30 дней / 90 дней / навсегда','Где купить':'funtime.su и /dm (за монеты)','Промокод':'−15% по промокодам ютуберов'}},
+{id:'d-princ',cat:'donat',rar:'',name:'Принц',pill:'Привилегия • донат',cls:'p-leg',img:'assets/donat/donat-priv-princ.png',short:'от 979 ₽ • 30 / 90 дней / навсегда',desc:'Привилегия FunTime: префикс в чате и табе, киты, зарплата и повышенные лимиты. Точный список возможностей смотри на funtime.su при выборе товара.',effects:[['Сроки: 30 / 90 / навсегда','neu'],['Докуп со скидкой','pos']],info:{'Цена':'от 979 ₽','Сроки':'30 дней / 90 дней / навсегда','Где купить':'funtime.su и /dm (за монеты)','Промокод':'−15% по промокодам ютуберов'}},
+{id:'d-knyaz',cat:'donat',rar:'',name:'Князь',pill:'Привилегия • донат',cls:'p-leg',img:'assets/donat/donat-priv-knyaz.png',short:'от 1 299 ₽ • 30 / 90 дней / навсегда',desc:'Топовая PvP-привилегия. Чаще всего берут навсегда с докупом от Принца: 2799 − 1799 = 1000 биржи. Точный список возможностей — на funtime.su.',effects:[['Сроки: 30 / 90 / навсегда','neu'],['Докуп со скидкой','pos']],info:{'Цена':'от 1 299 ₽','Сроки':'30 дней / 90 дней / навсегда','Где купить':'funtime.su и /dm (за монеты)','Докуп':'Если есть донат навсегда — цена ниже (вычитается стоимость текущего)','Промокод':'−15% по промокодам ютуберов'}},
+{id:'d-gercog',cat:'donat',rar:'',name:'Герцог',pill:'Привилегия • донат',cls:'p-leg',img:'assets/donat/donat-priv-gercog.png',short:'от 2 799 ₽ • 30 / 90 дней / навсегда',desc:'Максимальная привилегия в магазине. Точный список возможностей и слотов аукциона смотри на funtime.su при выборе срока.',effects:[['Сроки: 30 / 90 / навсегда','neu'],['Максимум возможностей','pos']],info:{'Цена':'от 2 799 ₽','Сроки':'30 дней / 90 дней / навсегда','Где купить':'funtime.su и /dm (за монеты)','Промокод':'−15% по промокодам ютуберов'}},
+{id:'d-tokens',cat:'donat',rar:'',name:'Токены',pill:'Валюта • донат',cls:'p-pot',img:'assets/donat/donat-tokens.png',short:'от 15 ₽ • валюта /donshop',desc:'Донат-валюта: зелья, сферы, талисманы, кейсы и экстра-магазин. Токен-кейс в игре — 1 790 ТК.',effects:[['Для /donshop и /extra','pos']],info:{'Цена':'от 15 ₽','Где купить':'funtime.su','Промокод':'−15% по промокодам ютуберов'}},
+{id:'d-birzha',cat:'donat',rar:'',name:'Биржа Баланс',pill:'Валюта • донат',cls:'p-pot',img:'assets/donat/donat-birzha.png',short:'от 15 ₽ • 1 ₽ = 1 биржа',desc:'Валюта для донат-маркета /dm: покупай донат у игроков за монеты или выполняй чужие заказы за монеты. Курс биржи плавает (~1.6–2.3кк монет за 1).',effects:[['Курс: 1 ₽ = 1 биржа','neu'],['Для /dm','pos']],info:{'Цена':'от 15 ₽','Где купить':'funtime.su','Как работает':'/dm → заказы игроков / создать заказ'}},
+{id:'d-key-ob',cat:'donat',rar:'',name:'Обычный Ключ',pill:'Ключ • кейс',cls:'p-pot',img:'assets/donat/donat-key.png',short:'10 ₽ • ключ кейса',desc:'Ключ для открытия кейса в меню кейсов. Можно взять предметом (ПКМ по кейсу) и продать на /ah.',effects:[['Открывает кейс','neu']],info:{'Цена':'10 ₽','Где купить':'funtime.su'}},
+{id:'d-key-mon',cat:'donat',rar:'',name:'Монетный Ключ',pill:'Ключ • кейс',cls:'p-pot',img:'assets/donat/donat-key.png',short:'10 ₽ • ключ кейса',desc:'Ключ для монетного кейса. Можно взять предметом и продать на /ah.',effects:[['Открывает кейс','neu']],info:{'Цена':'10 ₽','Где купить':'funtime.su'}},
+{id:'d-key-tok',cat:'donat',rar:'',name:'Токен Ключ',pill:'Ключ • кейс',cls:'p-pot',img:'assets/donat/donat-key.png',short:'18 ₽ • ключ кейса',desc:'Ключ для токен-кейса. Можно взять предметом и продать на /ah.',effects:[['Открывает кейс','neu']],info:{'Цена':'18 ₽','Где купить':'funtime.su'}},
+{id:'d-key-ins',cat:'donat',rar:'',name:'Инструментальный Ключ',pill:'Ключ • кейс',cls:'p-pot',img:'assets/donat/donat-key.png',short:'18 ₽ • ключ кейса',desc:'Ключ для кейса с инструментами. Можно взять предметом и продать на /ah.',effects:[['Открывает кейс','neu']],info:{'Цена':'18 ₽','Где купить':'funtime.su'}},
+{id:'d-key-or',cat:'donat',rar:'',name:'Оружейный Ключ',pill:'Ключ • кейс',cls:'p-pot',img:'assets/donat/donat-key.png',short:'18 ₽ • ключ кейса',desc:'Ключ для оружейного кейса. Можно взять предметом и продать на /ah.',effects:[['Открывает кейс','neu']],info:{'Цена':'18 ₽','Где купить':'funtime.su'}},
+{id:'d-key-br',cat:'donat',rar:'',name:'Броневой Ключ',pill:'Ключ • кейс',cls:'p-pot',img:'assets/donat/donat-key.png',short:'18 ₽ • ключ кейса',desc:'Ключ для броневого кейса. Можно взять предметом и продать на /ah.',effects:[['Открывает кейс','neu']],info:{'Цена':'18 ₽','Где купить':'funtime.su'}},
+{id:'d-key-dk',cat:'donat',rar:'',name:'Донат Ключ',pill:'Ключ • кейс',cls:'p-leg',img:'assets/donat/donat-key.png',short:'139 ₽ • шанс выиграть привилегию',desc:'Главный кейс сервера: шанс выбить привилегию навсегда (люди начинают путь к Князю со Сквида из ДК). Можно взять предметом и продать на /ah.',effects:[['Шанс привилегии навсегда','pos']],info:{'Цена':'139 ₽','Где купить':'funtime.su, минимум на /dm ~14.7кк монет'}},
+{id:'d-razmut',cat:'donat',rar:'',name:'Размут',pill:'Услуга • донат',cls:'p-deb',img:'assets/donat/donat-razmut.png',short:'49 ₽ • снятие мута',desc:'Снятие мута через магазин.',effects:[['Снятие мута','pos']],info:{'Цена':'49 ₽','Где купить':'funtime.su'}},
+{id:'d-razban',cat:'donat',rar:'',name:'Разбан',pill:'Услуга • донат',cls:'p-deb',img:'assets/donat/donat-razban.png',short:'249 ₽ • снятие бана',desc:'Снятие бана через магазин. Апелляции отдельно — ответы занимают до 30–80 часов.',effects:[['Снятие бана','pos']],info:{'Цена':'249 ₽','Где купить':'funtime.su'}}
+];
+ITEMS.push(...DONAT);
+const YT=[
+{id:'y-pioner',cat:'yt',rar:'',name:'Пионер',pill:'Глава проекта',cls:'p-leg',img:'assets/yt/yt-pioner.jpg',short:'679 тыс. подписчиков • 46 видео',desc:'В Майнкрафте — Пионер, в жизни — Коля. Глава проекта FunTime (FunTime.su). Самые масштабные вайпы и фермы на анархии.',effects:[['679 тыс. подписчиков','pos'],['46 видео','neu']],info:{'Канал':'youtube.com/@IIuoneR','Промокод':'/piona — бесплатный кейс','Подписчики':'679 тыс. (октябрь 2026)'}},
+{id:'y-akvich',cat:'yt',rar:'',name:'Аквыч',pill:'Официальный ютубер',cls:'p-chaos',img:'assets/yt/yt-akvich.jpg',short:'277 тыс. подписчиков • 264 видео',desc:'Официальный ютубер FunTime с 28.10.2022. Интересные затеи и движухи на сервере.',effects:[['277 тыс. подписчиков','pos'],['264 видео','neu']],info:{'Канал':'youtube.com/@akvi4','Промокод':'/aqua — бесплатный кейс','Подписчики':'277 тыс. (октябрь 2026)'}},
+{id:'y-fonix',cat:'yt',rar:'',name:'FONIX',pill:'Официальный ютубер',cls:'p-chaos',img:'assets/yt/yt-fonix.jpg',short:'104 тыс. подписчиков • 67 видео',desc:'Официальный ютубер FunTime с 18.10.2022. Мотивирует роликами играть дальше: королевская битва и масштабные ивенты.',effects:[['104 тыс. подписчиков','pos'],['67 видео','neu']],info:{'Канал':'youtube.com/@fonix5890','Промокод':'/fonix — бесплатный кейс','Подписчики':'104 тыс. (октябрь 2026)'}},
+{id:'y-fokus1',cat:'yt',rar:'',name:'Fokus1',pill:'Официальный ютубер',cls:'p-chaos',img:'assets/yt/yt-fokus1.jpg',short:'92,8 тыс. подписчиков • 211 видео',desc:'Официальный ютубер FunTime с 23.12.2022. Вайпы, старты, рейды баз и войны кланов.',effects:[['92,8 тыс. подписчиков','pos'],['211 видео','neu']],info:{'Канал':'youtube.com/@fokus1311','Промокод':'/fokus1 — кейс + скидка 15% fokus1 на донат','Подписчики':'92,8 тыс. (октябрь 2026)'}},
+{id:'y-kastroom',cat:'yt',rar:'',name:'Kastroom',pill:'Официальный ютубер',cls:'p-chaos',img:'assets/yt/yt-kastroom.jpg',short:'81,8 тыс. подписчиков • 35 видео',desc:'Каструм. Официальный ютубер FunTime с 12.09.2023.',effects:[['81,8 тыс. подписчиков','pos'],['35 видео','neu']],info:{'Канал':'youtube.com/@kastroom1','Подписчики':'81,8 тыс. (октябрь 2026)'}},
+{id:'y-dane4ka',cat:'yt',rar:'',name:'_Dane4ka_',pill:'Официальный ютубер',cls:'p-chaos',img:'assets/yt/yt-dane4ka.jpg',short:'66,6 тыс. подписчиков • 216 видео',desc:'Данечка Харди. Официальный ютубер FunTime с 11.02.2024.',effects:[['66,6 тыс. подписчиков','pos'],['216 видео','neu']],info:{'Канал':'youtube.com/@Dane4kaHardyyy','Промокод':'/hardy — бесплатный кейс','Подписчики':'66,6 тыс. (октябрь 2026)'}},
+{id:'y-honey',cat:'yt',rar:'',name:'Honey',pill:'Официальный ютубер',cls:'p-chaos',img:'assets/yt/yt-honey.jpg',short:'43,3 тыс. подписчиков • 72 видео',desc:'Хоней. Официальный ютубер FunTime с 11.02.2024. Приятные ПВЕ-ролики.',effects:[['43,3 тыс. подписчиков','pos'],['72 видео','neu']],info:{'Канал':'youtube.com/@Honey_l1fe','Промокод':'/honey — бесплатный кейс','Подписчики':'43,3 тыс. (октябрь 2026)'}},
+{id:'y-anim4ik',cat:'yt',rar:'',name:'Anim4ik',pill:'Официальный ютубер',cls:'p-chaos',img:'assets/yt/yt-anim4ik.jpg',short:'33 тыс. подписчиков • 91 видео',desc:'Анимчик. Официальный ютубер FunTime с 14.06.2025.',effects:[['33 тыс. подписчиков','pos'],['91 видео','neu']],info:{'Канал':'youtube.com/@Anim4ikMinecraft','Подписчики':'33 тыс. (октябрь 2026)'}},
+{id:'y-flerni',cat:'yt',rar:'',name:'FLERNI',pill:'Официальный ютубер',cls:'p-chaos',img:'assets/yt/yt-flerni.jpg',short:'26,6 тыс. подписчиков • 34 видео',desc:'Флерни. Официальный ютубер FunTime с 14.06.2025.',effects:[['26,6 тыс. подписчиков','pos'],['34 видео','neu']],info:{'Канал':'youtube.com/@FLERNI','Подписчики':'26,6 тыс. (октябрь 2026)'}},
+{id:'y-aks',cat:'yt',rar:'',name:'Акс',pill:'Официальный ютубер',cls:'p-chaos',img:'assets/yt/yt-aks.jpg',short:'16,4 тыс. подписчиков • 25 видео',desc:'Официальный ютубер FunTime с 29.01.2025.',effects:[['16,4 тыс. подписчиков','pos'],['25 видео','neu']],info:{'Канал':'youtube.com/@Ax8ezki','Подписчики':'16,4 тыс. (октябрь 2026)'}},
+{id:'y-jaguar',cat:'yt',rar:'',name:'Ягуар - ПвП',pill:'Партнёр • ПвП',cls:'p-pot',img:'assets/yt/yt-jaguar.jpg',short:'15,5 тыс. подписчиков • 104 видео',desc:'ПвП-контент на FunTime: инвентари за 50/100/250кк, ивенты, полунезерка. Свой скин Jaguars1.',effects:[['15,5 тыс. подписчиков','pos'],['104 видео','neu']],info:{'Канал':'youtube.com/@jaguarspvp','Промокод':'/jaguar — бесплатный кейс','Подписчики':'15,5 тыс. (октябрь 2026)'}},
+{id:'y-nefort',cat:'yt',rar:'',name:'Нефорт',pill:'Официальный ютубер',cls:'p-chaos',img:'assets/yt/yt-nefort.jpg',short:'14,3 тыс. подписчиков • 139 видео',desc:'Официальный ютубер FunTime с 05.01.2023.',effects:[['14,3 тыс. подписчиков','pos'],['139 видео','neu']],info:{'Канал':'youtube.com/@NeFort','Подписчики':'14,3 тыс. (октябрь 2026)'}}
+];
+ITEMS.push(...YT);
+const CATS={spec:'Спец-предметы — расходники',sphere:'Сферы — 2-я рука',tal:'Талисманы — 2-я рука',pot:'Зелья — /donshop',donat:'Донат — funtime.su',yt:'Ютуберы — партнёры FunTime'};
+let filter='all', rfilter='all';
+function cardClass(it){
+if(it.cat==='sphere'||it.cat==='tal'){if(it.rar==='leg')return 'leg';if(it.rar==='chaos')return 'chaos';return 'def';}
+if(it.cat==='spec'){if(it.id==='trap'||it.id==='plast')return 'def';return '';}
+return '';
+}
+function render(){
+const q=(document.getElementById('q').value||'').toLowerCase();
+const counts={all:0,spec:0,sphere:0,tal:0,pot:0,donat:0,yt:0};
+ITEMS.forEach(i=>{counts.all++;counts[i.cat]++;});
+document.getElementById('c-all').textContent=' '+counts.all;
+document.getElementById('c-spec').textContent=' '+counts.spec;
+document.getElementById('c-sphere').textContent=' '+counts.sphere;
+document.getElementById('c-tal').textContent=' '+counts.tal;
+document.getElementById('c-pot').textContent=' '+counts.pot;
+document.getElementById('c-donat').textContent=' '+counts.donat;
+document.getElementById('c-yt').textContent=' '+counts.yt;
+const box=document.getElementById('sections');box.innerHTML='';let n=0;
+['spec','sphere','tal','pot','donat','yt'].forEach(c=>{
+if(filter!=='all'&&filter!==c)return;
+let list=ITEMS.filter(i=>i.cat===c);
+if(rfilter!=='all')list=list.filter(i=>i.rar===rfilter);
+if(q)list=list.filter(i=>(i.name+' '+i.short+' '+i.desc+' '+Object.values(i.info||{}).join(' ')).toLowerCase().includes(q));
+if(!list.length)return;
+const h=document.createElement('div');h.className='sect';h.innerHTML='<h2>'+CATS[c]+'</h2><div class="line"></div><div class="n">'+list.length+'</div>';
+box.appendChild(h);
+const g=document.createElement('div');g.className='grid';
+list.forEach(it=>{
+n++;
+const d=document.createElement('div');d.className='card '+cardClass(it)+(it.cat==='pot'?' pot':'');d.style.animationDelay=Math.min(n*35,650)+'ms';
+let hue=it.hue?';filter:'+it.hue:'';
+let dot=it.color?'<div style="margin-top:8px;font-size:11px;color:var(--mut)"><span class="dot" style="background:'+it.color+'"></span>'+it.color+'</div>':'';
+const _src=it.img||POT_IMG;
+d.innerHTML='<img loading="lazy" src="'+_src+'" style="image-rendering:pixelated'+hue+'" alt="'+it.name+'" onerror="this.src=\'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2264%22 height=%2264%22><rect width=%2264%22 height=%2264%22 fill=%22%23111%22/><text x=%2232%22 y=%2238%22 font-size=%2228%22 text-anchor=%22middle%22>🎒</text></svg>\'"><div class="pill '+it.cls+'" style="margin-top:4px">'+it.pill+'</div><h3>'+it.name+'</h3><p>'+it.short+'</p>'+(it.info&&it.info['Цена']?'<div class="price">'+it.info['Цена']+'</div>':'')+dot;
+d.onclick=()=>openModal(it.id);g.appendChild(d);
+});
+box.appendChild(g);
+});
+if(!n){box.innerHTML='<div class="empty">Ничего не найдено. Попробуй: трапка, дезка, явка, смерч, божка, хаос, вихрь, гнев, радиация...</div>';}
+document.getElementById('count').textContent='Показано: '+n+' / '+ITEMS.length;
+}
+function openModal(id){
+const it=ITEMS.find(x=>x.id===id);if(!it)return;
+const eff=(it.effects||[]).map(e=>'<span class="'+e[1]+'">'+e[0]+'</span>').join('');
+const kv=Object.entries(it.info||{}).map(k=>'<div class="kv"><b>'+k[0]+':</b> '+k[1]+'</div>').join('');
+let skins='';
+if(it.skins){skins='<div class="kv"><b>Скины /trapskins:</b><div class="trap-skins">'+it.skins.map(s=>'<div class="ts"><b>'+s[0]+'</b> — '+s[1]+'</div>').join('')+'</div></div>';}
+let colorRow=it.color?'<div class="kv"><b>Цвет зелья:</b> <span class="dot" style="background:'+it.color+'"></span>'+it.color+' (в игре — splash-бутылка такого цвета)</div>':'';
+document.getElementById('modal').innerHTML=
+'<div class="m-head"><img src="'+(it.img||POT_IMG)+'" style="'+(it.hue?'filter:'+it.hue:'')+'"><div><div class="pill '+it.cls+'">'+it.pill+'</div><h2 style="margin-top:8px">'+it.name+'</h2><div class="sub">'+it.desc+'</div></div></div>'+
+'<div class="m-body"><div><b>Эффекты:</b><div class="eff">'+eff+'</div></div>'+kv+skins+colorRow+'<div class="kv" style="opacity:.8">💡 Точные цифры смотри в игре при наведении в <b>/donshop</b> / <b>/crafts</b> — FunTime правит баланс каждый вайп. Сверено с вики 10.10 + форумом.</div></div>'+
+'<div class="m-foot"><button class="btn primary" onclick="closeModal()">Понятно</button><button class="btn" onclick="copyName(\''+it.name.replace(/'/g,'')+'\')">Скопировать название</button></div>';
+document.getElementById('overlay').classList.add('open');
+}
+function closeModal(){document.getElementById('overlay').classList.remove('open')}
+function copyName(t){try{navigator.clipboard.writeText(t);}catch(e){}alert('Скопировано: '+t)}
+document.getElementById('overlay').addEventListener('click',e=>{if(e.target.id==='overlay')closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+document.getElementById('q').addEventListener('input',render);
+document.getElementById('tabs').addEventListener('click',e=>{const t=e.target.closest('.tab');if(!t)return;document.querySelectorAll('#tabs .tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');filter=t.dataset.f;render();});
+document.getElementById('rars').addEventListener('click',e=>{const t=e.target.closest('.rar');if(!t)return;document.querySelectorAll('.rar').forEach(x=>x.classList.remove('active'));t.classList.add('active');rfilter=t.dataset.r;render();});
+function closeWelcome(){document.getElementById('welcome').classList.remove('open');}
+render();
+setTimeout(()=>{document.getElementById('welcome').classList.add('open');},700);
+</script>
+</body>
+</html>
